@@ -1,43 +1,72 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { content } from "../features/filter/filterSlice";
+import {
+  autoUploadSupport,
+  content,
+  polygonAmount,
+  price,
+} from "../features/filter/filterSlice";
 
 export default function FilterMenu() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.filter);
   const [filterData, setFilterData] = useState(data);
 
-  const handleFilter = (event) => {
+  const handleFilterContent = (event) => {
     let tempFilter = {
-      sort: filterData.sort,
-      filter: event.target.value,
+      content: event.target.value,
+      autoUploadSupport: filterData.autoUploadSupport,
+      price: filterData.price,
+      poligon: filterData.poligon,
     };
     setFilterData(tempFilter);
     dispatch(content(event.target.value));
+  };
+
+  const handleFilterAutoUpload = (event) => {
+    let tempFilter = {
+      content: filterData.content,
+      autoUploadSupport: event.target.value,
+      price: filterData.price,
+      poligon: filterData.poligon,
+    };
+    setFilterData(tempFilter);
+    dispatch(autoUploadSupport(event.target.value));
+  };
+
+  const handleFilterPrice = (event) => {
+    let tempFilter = {
+      content: filterData.content,
+      autoUploadSupport: filterData.autoUploadSupport,
+      price: event.target.value,
+      poligon: filterData.poligon,
+    };
+    setFilterData(tempFilter);
+    dispatch(price(event.target.value));
+  };
+
+  const handleFilterPolygonAmount = (event) => {
+    let tempFilter = {
+      content: filterData.content,
+      autoUploadSupport: filterData.autoUploadSupport,
+      price: filterData.price,
+      poligonAmount: event.target.value,
+    };
+    setFilterData(tempFilter);
+    dispatch(polygonAmount(event.target.value));
   };
 
   return (
     <div>
       <h5>Category</h5>
       <div>
-        <input
-          className="form-check-input"
-          type="checkbox"
-          value=""
-          id="flexCheckDefault"
-        />
+        <input className="form-check-input" type="checkbox" value="" />
         <label className="form-check-label" htmlFor="flexCheckDefault">
           FullAvatar
         </label>
       </div>
       <div>
-        <input
-          className="form-check-input"
-          type="checkbox"
-          value=""
-          id="flexCheckChecked"
-          checked
-        />
+        <input className="form-check-input" type="checkbox" value="" />
         <label className="form-check-label" htmlFor="flexCheckChecked">
           Others
         </label>
@@ -49,8 +78,8 @@ export default function FilterMenu() {
             className="form-check-input"
             type="checkbox"
             value="Quest"
-            checked={filterData.filter === "Quest"}
-            onChange={handleFilter}
+            checked={filterData.content === "Quest"}
+            onChange={handleFilterContent}
           />
           <label className="form-check-label" htmlFor="flexCheckDefault">
             VRChat(Quest)
@@ -61,8 +90,8 @@ export default function FilterMenu() {
             className="form-check-input"
             type="checkbox"
             value="PC"
-            checked={filterData.filter === "PC"}
-            onChange={handleFilter}
+            checked={filterData.content === "PC"}
+            onChange={handleFilterContent}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             VRChat(PCVR)
@@ -73,8 +102,8 @@ export default function FilterMenu() {
             className="form-check-input"
             type="checkbox"
             value="Other"
-            checked={filterData.filter === "Other"}
-            onChange={handleFilter}
+            checked={filterData.content === "Other"}
+            onChange={handleFilterContent}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             Others
@@ -87,8 +116,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckDefault"
+            value="10"
+            checked={filterData.price === "10"}
+            onChange={handleFilterPrice}
           />
           <label className="form-check-label" htmlFor="flexCheckDefault">
             Under $10
@@ -98,9 +128,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckChecked"
-            checked
+            value="10-20"
+            checked={filterData.price === "10-20"}
+            onChange={handleFilterPrice}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             $10 to $20
@@ -110,8 +140,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckChecked"
+            value="20-30"
+            checked={filterData.price === "20-30"}
+            onChange={handleFilterPrice}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             $20 to $30
@@ -121,8 +152,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckChecked"
+            value="30-40"
+            checked={filterData.price === "30-40"}
+            onChange={handleFilterPrice}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             $30 to $40
@@ -132,8 +164,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckChecked"
+            value="40-50"
+            checked={filterData.price === "40-50"}
+            onChange={handleFilterPrice}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             $40 to $50
@@ -147,8 +180,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckDefault"
+            value="7"
+            checked={filterData.poligonAmount === "7"}
+            onChange={handleFilterContent}
           />
           <label className="form-check-label" htmlFor="flexCheckDefault">
             Under 🛆7,500
@@ -158,8 +192,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckChecked"
+            value="7-10"
+            checked={filterData.poligonAmount === "7-10"}
+            onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             🛆7,500 - 🛆10,000
@@ -169,8 +204,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckChecked"
+            value="10-15"
+            checked={filterData.poligonAmount === "10-15"}
+            onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             🛆10,000 - 🛆15,000
@@ -180,8 +216,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckChecked"
+            value="15-20"
+            checked={filterData.poligonAmount === "15-20"}
+            onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             🛆15,000 - 🛆20,000
@@ -191,8 +228,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckChecked"
+            value="20-32"
+            checked={filterData.poligonAmount === "20-32"}
+            onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             🛆20,000 - 🛆32,000
@@ -202,8 +240,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckChecked"
+            value="32-70"
+            checked={filterData.poligonAmount === "32-70"}
+            onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             🛆32,000 - 🛆70,000
@@ -216,8 +255,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckDefault"
+            value="Supported"
+            checked={filterData.autoUploadSupport === "Supported"}
+            onChange={handleFilterAutoUpload}
           />
           <label className="form-check-label" htmlFor="flexCheckDefault">
             Supported
@@ -227,8 +267,9 @@ export default function FilterMenu() {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
-            id="flexCheckChecked"
+            value="Unsupported"
+            checked={filterData.autoUploadSupport === "Unsupported"}
+            onChange={handleFilterAutoUpload}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
             Unsupported

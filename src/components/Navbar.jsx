@@ -1,6 +1,10 @@
+import { useDispatch } from "react-redux";
 import Logo from "../../public/logo_avatown_manual_1_basi_inverse.png";
+import { setSearch } from "../features/filter/filterSlice";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+
   return (
     <nav className="navbar bg-primary">
       <div className="container-fluid">
@@ -12,6 +16,7 @@ export default function Navbar() {
             type="search"
             placeholder="Search"
             aria-label="Search"
+            onChange={(e) => dispatch(setSearch(e.target.value))}
           />
         </form>
         <a className="text-dark icon-link icon-link-hover" href="#">
