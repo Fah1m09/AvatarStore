@@ -17,7 +17,7 @@ export default function FilterMenu() {
       content: event.target.value,
       autoUploadSupport: filterData.autoUploadSupport,
       price: filterData.price,
-      poligon: filterData.poligon,
+      polygonAmount: filterData.polygonAmount,
     };
     setFilterData(tempFilter);
     dispatch(content(event.target.value));
@@ -28,7 +28,7 @@ export default function FilterMenu() {
       content: filterData.content,
       autoUploadSupport: event.target.value,
       price: filterData.price,
-      poligon: filterData.poligon,
+      polygonAmount: filterData.polygonAmount,
     };
     setFilterData(tempFilter);
     dispatch(autoUploadSupport(event.target.value));
@@ -39,7 +39,7 @@ export default function FilterMenu() {
       content: filterData.content,
       autoUploadSupport: filterData.autoUploadSupport,
       price: event.target.value,
-      poligon: filterData.poligon,
+      polygonAmount: filterData.polygonAmount,
     };
     setFilterData(tempFilter);
     dispatch(price(event.target.value));
@@ -50,7 +50,7 @@ export default function FilterMenu() {
       content: filterData.content,
       autoUploadSupport: filterData.autoUploadSupport,
       price: filterData.price,
-      poligonAmount: event.target.value,
+      polygonAmount: event.target.value,
     };
     setFilterData(tempFilter);
     dispatch(polygonAmount(event.target.value));
@@ -181,8 +181,8 @@ export default function FilterMenu() {
             className="form-check-input"
             type="checkbox"
             value="7"
-            checked={filterData.poligonAmount === "7"}
-            onChange={handleFilterContent}
+            checked={filterData.polygonAmount === "7"}
+            onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckDefault">
             Under 🛆7,500
@@ -193,7 +193,7 @@ export default function FilterMenu() {
             className="form-check-input"
             type="checkbox"
             value="7-10"
-            checked={filterData.poligonAmount === "7-10"}
+            checked={filterData.polygonAmount === "7-10"}
             onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
@@ -205,7 +205,7 @@ export default function FilterMenu() {
             className="form-check-input"
             type="checkbox"
             value="10-15"
-            checked={filterData.poligonAmount === "10-15"}
+            checked={filterData.polygonAmount === "10-15"}
             onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
@@ -217,7 +217,7 @@ export default function FilterMenu() {
             className="form-check-input"
             type="checkbox"
             value="15-20"
-            checked={filterData.poligonAmount === "15-20"}
+            checked={filterData.polygonAmount === "15-20"}
             onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
@@ -229,7 +229,7 @@ export default function FilterMenu() {
             className="form-check-input"
             type="checkbox"
             value="20-32"
-            checked={filterData.poligonAmount === "20-32"}
+            checked={filterData.polygonAmount === "20-32"}
             onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">
@@ -241,7 +241,7 @@ export default function FilterMenu() {
             className="form-check-input"
             type="checkbox"
             value="32-70"
-            checked={filterData.poligonAmount === "32-70"}
+            checked={filterData.polygonAmount === "32-70"}
             onChange={handleFilterPolygonAmount}
           />
           <label className="form-check-label" htmlFor="flexCheckChecked">

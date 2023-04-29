@@ -1,34 +1,37 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { price } from "../../features/filter/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { addToCart } from "../../features/cart/cartSlice";
 
 export default function Products() {
+  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
-  const { search, content, autoUploadSupport, polygonAmount } = useSelector(
-    (state) => state.filter
-  );
+  const { price, search, content, autoUploadSupport, polygonAmount } =
+    useSelector((state) => state.filter);
   const productsPerPage = 12;
 
   const numPages = Math.ceil(products.length / productsPerPage);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const startIndex = currentPage * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const currentProducts = products.slice(startIndex, endIndex);
 
   const pageNum = () => {
-    for (let i = 0; i < { numPages }; i++) {
-      <li className="page-item">
-        <a className="page-link" href="#">
+    let elements = [];
+    for (let i = 1; i <= numPages; i++) {
+      elements.push(
+        <h5 className="pagination-text" onClick={() => setCurrentPage(i - 1)}>
           {i}
-        </a>
-      </li>;
+        </h5>
+      );
     }
+    return elements;
   };
 
   const createElements = (n) => {
-    var elements = [];
+    let elements = [];
     for (let i = 0; i < n; i++) {
       elements.push(
         <svg
@@ -75,13 +78,13 @@ export default function Products() {
       case "10":
         return product.price < 10;
       case "10-20":
-        return product.price > 10 && product.price < 20;
+        return product.price >= 10 && product.price <= 20;
       case "20-30":
-        return product.price > 20 && product.price < 30;
+        return product.price >= 20 && product.price <= 30;
       case "30-40":
-        return product.price > 30 && product.price < 40;
+        return product.price >= 30 && product.price <= 40;
       case "40-50":
-        return product.price > 40 && product.price < 50;
+        return product.price >= 40 && product.price <= 50;
       default:
         return true;
     }
@@ -90,20 +93,37 @@ export default function Products() {
   const filteredPolygon = (product) => {
     switch (polygonAmount) {
       case "7":
-        return product.poligon < 7500;
+        return product.polygon < 7500;
       case "7-10":
-        return product.poligon > 7500 && product.poligon < 10000;
+        return product.polygon > 7500 && product.polygon < 10000;
       case "10-15":
-        return product.poligon > 10000 && product.poligon < 15000;
+        return product.polygon > 10000 && product.polygon < 15000;
       case "15-20":
-        return product.poligon > 15000 && product.poligon < 20000;
+        return product.polygon > 15000 && product.polygon < 20000;
       case "20-32":
-        return product.poligon > 20000 && product.poligon < 32000;
+        return product.polygon > 20000 && product.polygon < 32000;
       case "32-70":
-        return product.poligon > 32000 && product.poligon < 700000;
+        return product.polygon > 32000 && product.polygon < 700000;
       default:
         return true;
     }
+  };
+
+  const handleAddToCart = (e, prod) => {
+    e.preventDefault();
+    let data = {
+      id: prod.id,
+      img: prod.img,
+      name: prod.name,
+      rating: prod.rating,
+      likes: prod.likes,
+      price: prod.price,
+      gender: prod.gender,
+      polygon: prod.polygon,
+      content: prod.content,
+      quantity: 1,
+    };
+    dispatch(addToCart(data));
   };
 
   return (
@@ -122,23 +142,58 @@ export default function Products() {
           <div key={prod.id} className="col-sm-4 col-md-3 box-product-outer">
             <div className="box-product">
               <div className="img-wrapper">
-                <a href="detail.html">
+                <Link to={`/product/${prod.id}`}>
                   <img alt="product" src={prod.img} />
-                </a>
+                </Link>
               </div>
               <h6>
-                <a href="detail.html">{prod.name}</a>
+                <Link to={`/product/${prod.id}`} className="product_title">
+                  {prod.name}
+                </Link>
               </h6>
-              <div className="">{createElements(prod.rating)}</div>
-              <div className="price">
-                <div>${prod.price}</div>
+              <div className="d-flex justify-content-between">
+                <div>
+                  {createElements(prod.rating)} {prod.rating} & {prod.likes}
+                  Likes
+                </div>
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="red"
+                    className="bi bi-heart-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                    />
+                  </svg>
+                </div>
               </div>
+
+              <div>${prod.price}</div>
+
               <div>
                 {prod.content}
                 <p>
                   Auto upload service ready, you can use this avatar within 24
                   hours
                 </p>
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-cart"
+                    viewBox="0 0 16 16"
+                    onClick={(e) => handleAddToCart(e, prod)}
+                  >
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
@@ -146,19 +201,23 @@ export default function Products() {
       <div className="d-flex align-items-center justify-content-center">
         <nav aria-label="Page navigation example">
           <ul className="pagination">
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Previous">
+            <li
+              className="page-item"
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
+              <a className="page-link" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
-                <span className="sr-only">Previous</span>
               </a>
             </li>
 
-            {pageNum}
+            {pageNum()}
 
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Next">
+            <li
+              className="page-item"
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+              <a className="page-link" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
-                <span className="sr-only">Next</span>
               </a>
             </li>
           </ul>

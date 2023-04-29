@@ -1,9 +1,16 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Logo from "../../public/logo_avatown_manual_1_basi_inverse.png";
 import { setSearch } from "../features/filter/filterSlice";
+import Cart from "./Cart";
 
 export default function Navbar() {
   const dispatch = useDispatch();
+  const [openCart, setOpenCart] = useState(false);
+
+  const handleCartPopUp = () => {
+    setOpenCart(!openCart);
+  };
 
   return (
     <nav className="navbar bg-primary">
@@ -37,6 +44,7 @@ export default function Navbar() {
             fill="currentColor"
             className="bi bi-cart"
             viewBox="0 0 16 16"
+            onClick={() => handleCartPopUp()}
           >
             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
           </svg>
@@ -52,6 +60,9 @@ export default function Navbar() {
           </svg>
         </a>
       </div>
+      {openCart && (
+        <Cart openCart={openCart} handleCartPopUp={handleCartPopUp} />
+      )}
     </nav>
   );
 }
