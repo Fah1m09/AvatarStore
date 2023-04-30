@@ -4,7 +4,7 @@ const initialState = {
   products: [
     {
       id: 1,
-      img: "avatarPictures/VRCimageA(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageA(F).png",
       name: "VRC Avatar name Avatown A female",
       rating: 5,
       likes: 100,
@@ -16,7 +16,7 @@ const initialState = {
     },
     {
       id: 2,
-      img: "avatarPictures/VRCimageB(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageB(F).png",
       name: "Avatar name avatown nice original Avatown B",
       rating: 3.7,
       likes: 30,
@@ -28,7 +28,7 @@ const initialState = {
     },
     {
       id: 3,
-      img: "avatarPictures/VRCimageC(M).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageC(M).png",
       name: "Avatar name avatown nice original Avatown C",
       rating: 4,
       likes: 100,
@@ -40,7 +40,7 @@ const initialState = {
     },
     {
       id: 4,
-      img: "avatarPictures/VRCimageD(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageD(F).png",
       name: "Avatar name avatown nice original Avatown D",
       rating: 4.7,
       likes: 0,
@@ -52,7 +52,7 @@ const initialState = {
     },
     {
       id: 5,
-      img: "avatarPictures/VRCimageE(M).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageE(M).png",
       name: "Avatar name avatown nice original Avatown E",
       rating: 4.7,
       likes: 0,
@@ -64,7 +64,7 @@ const initialState = {
     },
     {
       id: 6,
-      img: "avatarPictures/VRCimageF(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageF(F).png",
       name: "Avatar name avatown nice original Avatown F",
       rating: 4.7,
       likes: 0,
@@ -76,7 +76,7 @@ const initialState = {
     },
     {
       id: 7,
-      img: "avatarPictures/VRCimageG(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageG(F).png",
       name: "Avatar name avatown nice original Avatown G",
       rating: 4.7,
       likes: 0,
@@ -88,7 +88,7 @@ const initialState = {
     },
     {
       id: 8,
-      img: "avatarPictures/VRCimageH(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageH(F).png",
       name: "Avatar name avatown nice original Avatown H",
       rating: 4.7,
       likes: 0,
@@ -100,7 +100,7 @@ const initialState = {
     },
     {
       id: 9,
-      img: "avatarPictures/VRCimageI(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageI(F).png",
       name: "Avatar name 9",
       rating: 4.7,
       likes: 0,
@@ -112,7 +112,7 @@ const initialState = {
     },
     {
       id: 10,
-      img: "avatarPictures/VRCimageJ(M).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageJ(M).png",
       name: "Avatar name 10",
       rating: 4.7,
       likes: 0,
@@ -124,7 +124,7 @@ const initialState = {
     },
     {
       id: 11,
-      img: "avatarPictures/VRCimageK(M).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageK(M).png",
       name: "Avatar name",
       rating: 5,
       likes: 100,
@@ -136,7 +136,7 @@ const initialState = {
     },
     {
       id: 12,
-      img: "avatarPictures/VRCimageL(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageL(F).png",
       name: "Avatar name 12",
       rating: 3.7,
       likes: 30,
@@ -148,7 +148,7 @@ const initialState = {
     },
     {
       id: 13,
-      img: "avatarPictures/VRCimageM(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageM(F).png",
       name: "Avatar name 13",
       rating: 4,
       likes: 100,
@@ -160,7 +160,7 @@ const initialState = {
     },
     {
       id: 14,
-      img: "avatarPictures/VRCimageN(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageN(F).png",
       name: "Avatar name 14",
       rating: 4,
       likes: 0,
@@ -172,7 +172,7 @@ const initialState = {
     },
     {
       id: 15,
-      img: "avatarPictures/VRCimageO(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageO(F).png",
       name: "Avatar name 15",
       rating: 4.7,
       likes: 660,
@@ -184,7 +184,7 @@ const initialState = {
     },
     {
       id: 16,
-      img: "avatarPictures/VRCimageP(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageP(F).png",
       name: "Avatar name 16",
       rating: 4.7,
       likes: 700,
@@ -196,7 +196,7 @@ const initialState = {
     },
     {
       id: 17,
-      img: "avatarPictures/VRCimageQ(M).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageQ(M).png",
       name: "Avatar name 17",
       rating: 2,
       likes: 50,
@@ -208,7 +208,7 @@ const initialState = {
     },
     {
       id: 18,
-      img: "avatarPictures/VRCimageR(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageR(F).png",
       name: "Avatar name 18",
       rating: 4.7,
       likes: 30,
@@ -220,7 +220,7 @@ const initialState = {
     },
     {
       id: 19,
-      img: "avatarPictures/VRCimageS(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageS(F).png",
       name: "Avatar name 19",
       rating: 4.7,
       likes: 20,
@@ -232,7 +232,7 @@ const initialState = {
     },
     {
       id: 20,
-      img: "avatarPictures/VRCimageT(F).png",
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageT(F).png",
       name: "Avatar name 20",
       rating: 4.7,
       likes: 100,

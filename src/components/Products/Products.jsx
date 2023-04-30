@@ -139,60 +139,94 @@ export default function Products() {
         .filter((product) => filteredPolygon(product))
         .filter((product) => filteredAutoUpload(product))
         .map((prod) => (
-          <div key={prod.id} className="col-sm-4 col-md-3 box-product-outer">
+          <div key={prod.id} className="col-sm-3 box-product-outer">
             <div className="box-product">
-              <div className="img-wrapper">
+              <div className="img-wrapper position-relative">
                 <Link to={`/product/${prod.id}`}>
                   <img alt="product" src={prod.img} />
-                </Link>
-              </div>
-              <h6>
-                <Link to={`/product/${prod.id}`} className="product_title">
-                  {prod.name}
-                </Link>
-              </h6>
-              <div className="d-flex justify-content-between">
-                <div>
-                  {createElements(prod.rating)} {prod.rating} & {prod.likes}
-                  Likes
-                </div>
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="red"
-                    className="bi bi-heart-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              <div>${prod.price}</div>
-
-              <div>
-                {prod.content}
-                <p>
-                  Auto upload service ready, you can use this avatar within 24
-                  hours
-                </p>
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-cart"
-                    viewBox="0 0 16 16"
+                  <button
                     onClick={(e) => handleAddToCart(e, prod)}
+                    className="btn btn-primary position-absolute top-0 end-0 m-2"
                   >
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-cart"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                    </svg>
+                    Add
+                  </button>
+                </Link>
+              </div>
+              <div className="box-product-details">
+                <h6>
+                  <Link to={`/product/${prod.id}`} className="product_title">
+                    {prod.name}
+                  </Link>
+                </h6>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    {createElements(prod.rating)} {prod.rating} & {prod.likes}
+                    Likes
+                  </div>
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="red"
+                      className="bi bi-heart-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                <p className="box-product-price">${prod.price}</p>
+
+                <div>
+                  <div className="d-flex align-items-center">
+                    <div
+                      className={`ball rounded-circle ${
+                        prod.content === "PC" ? "blue-ball" : "green-ball"
+                      }`}
+                    ></div>
+                    {prod.content} Only
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    {prod.autoUpload && (
+                      <p className="box-auto-upload">
+                        Auto upload service ready, you can use this avatar
+                        within 24 hours
+                      </p>
+                    )}
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      className="bi bi-box-arrow-up"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"
+                      />
+                      <path
+                        fillRule="evenodd"
+                        d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"
+                      />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>

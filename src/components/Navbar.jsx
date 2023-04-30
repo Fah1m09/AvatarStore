@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Logo from "../../public/logo_avatown_manual_1_basi_inverse.png";
 import { setSearch } from "../features/filter/filterSlice";
 import Cart from "./Cart";
@@ -13,24 +14,29 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar bg-primary">
+    <nav className="navbar bg-gradient-purple">
       <div className="container-fluid">
-        <img src={Logo} alt="logo" width="170" height="40" />
-        <p>Go to Marketpage</p>
-        <form className="d-flex" role="search">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            onChange={(e) => dispatch(setSearch(e.target.value))}
-          />
-        </form>
+        <Link to={"/"}>
+          <img src={Logo} alt="logo" width="170" height="40" />
+        </Link>
+
+        <Link to={"/"}>Go to Marketpage</Link>
+
         <a className="text-dark icon-link icon-link-hover" href="#">
+          <form className="d-flex w-100" role="search">
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              onChange={(e) => dispatch(setSearch(e.target.value))}
+            />
+          </form>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
+            color="white"
             fill="currentColor"
             className="bi bi-bell"
             viewBox="0 0 16 16"
@@ -39,9 +45,9 @@ export default function Navbar() {
           </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
+            width="20"
+            height="20"
+            color="white"
             className="bi bi-cart"
             viewBox="0 0 16 16"
             onClick={() => handleCartPopUp()}
@@ -52,7 +58,8 @@ export default function Navbar() {
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
-            fill="currentColor"
+            color="white"
+            fill="danger"
             className="bi bi-person"
             viewBox="0 0 16 16"
           >
