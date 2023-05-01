@@ -17,18 +17,17 @@ const cartSlice = createSlice({
             );
             if (existingProductIndex !== -1) {
               const updatedProducts = [...state.product];
-              updatedProducts[existingProductIndex].quantity += productToAdd.quantity;
               return {
                 ...state,
                 product: updatedProducts,
-                total: state.total + productToAdd.price * productToAdd.quantity,
+                total: state.total + productToAdd.price,
                 items: state.items + 1 
               };
             } else {
               return {
                 ...state,
                 product: [...state.product, productToAdd],
-                total: state.total + productToAdd.price * productToAdd.quantity,
+                total: state.total + productToAdd.price,
                 items: state.items + 1 
               };
             }
@@ -46,8 +45,8 @@ const cartSlice = createSlice({
                   ],
                   total:
                     state.total -
-                    state.product[index].price * state.product[index].quantity,
-                    items: state.items - state.product[index].quantity
+                    state.product[index].price,
+                    items: state.items - 1
                 };
               }
               return state;

@@ -17,7 +17,7 @@ const filterSlice = createSlice({
         setSearch: (state, action) => {
             state.search = action.payload
         },
-        sort: (state, action) => {
+        sortByFilter: (state, action) => {
             state.sort = action.payload
         },
         content: (state, action) => {
@@ -40,4 +40,4 @@ const filterSlice = createSlice({
 });
 
 export default filterSlice.reducer;
-export const {  setSearch, sort, content, price, polygonAmount, category, autoUploadSupport } = filterSlice.actions;
+export const {  setSearch, sortByFilter, content, price, polygonAmount, category, autoUploadSupport } = filterSlice.actions;

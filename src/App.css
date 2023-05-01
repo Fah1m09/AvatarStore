@@ -48,6 +48,13 @@ body {
   line-height: 12px;
 }
 
+.box-product-user{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
 .tab-content .box-product-outer {
   margin-bottom: 0;
 }

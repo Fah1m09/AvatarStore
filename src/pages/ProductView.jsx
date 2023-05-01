@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../features/cart/cartSlice";
 
 export default function ProductView() {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
+  const { product } = useSelector((state) => state.cart);
   const [currentProduct, setCurrentProduct] = useState({});
 
   const createElements = (n) => {
@@ -29,6 +32,23 @@ export default function ProductView() {
   useEffect(() => {
     setCurrentProduct(products.find((x) => x.id === parseInt(id)));
   }, [id, products]);
+
+  const handleAddToCart = (e, prod) => {
+    e.preventDefault();
+    let data = {
+      id: prod.id,
+      img: prod.img,
+      name: prod.name,
+      rating: prod.rating,
+      likes: prod.likes,
+      price: prod.price,
+      gender: prod.gender,
+      polygon: prod.polygon,
+      content: prod.content,
+    };
+    dispatch(addToCart(data));
+  };
+
   return (
     <>
       {currentProduct && (
@@ -52,8 +72,15 @@ export default function ProductView() {
                 </div>
 
                 <h5>{currentProduct?.likes} Likes</h5>
-                <button type="button" className="btn btn-primary">
-                  Add to Cart
+                <button
+                  disabled={product.find((x) => x.id === currentProduct.id)}
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={(e) => handleAddToCart(e, currentProduct)}
+                >
+                  {product.find((x) => x.id === currentProduct.id)
+                    ? "Remove from Cart"
+                    : "Add to Cart"}
                 </button>
               </div>
             </div>

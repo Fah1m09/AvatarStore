@@ -5,8 +5,8 @@ import { addToCart } from "../../features/cart/cartSlice";
 
 export default function Products() {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.product);
-  const { price, search, content, autoUploadSupport, polygonAmount } =
+  const { products, users } = useSelector((state) => state.product);
+  const { price, search, content, sort, autoUploadSupport, polygonAmount } =
     useSelector((state) => state.filter);
   const productsPerPage = 12;
 
@@ -47,6 +47,23 @@ export default function Products() {
       );
     }
     return elements;
+  };
+
+  const filteredSortBy = (a, b) => {
+    switch (sort) {
+      case "priceLow2High":
+        return parseFloat(a.price) - parseFloat(b.price);
+      case "priceHigh2Low":
+        return parseFloat(b.price) - parseFloat(a.price);
+      case "polHigh2Low":
+        return parseFloat(a.polygon) - parseFloat(b.polygon);
+      case "polLow2High":
+        return parseFloat(b.polygon) - parseFloat(a.polygon);
+      case "review":
+        return parseFloat(b.rating) - parseFloat(a.rating);
+      default:
+        return true;
+    }
   };
 
   const filteredContent = (product) => {
@@ -121,7 +138,6 @@ export default function Products() {
       gender: prod.gender,
       polygon: prod.polygon,
       content: prod.content,
-      quantity: 1,
     };
     dispatch(addToCart(data));
   };
@@ -138,6 +154,7 @@ export default function Products() {
         .filter((product) => filteredPrice(product))
         .filter((product) => filteredPolygon(product))
         .filter((product) => filteredAutoUpload(product))
+        .sort((a, b) => filteredSortBy(a, b))
         .map((prod) => (
           <div key={prod.id} className="col-sm-3 box-product-outer">
             <div className="box-product">
@@ -189,7 +206,20 @@ export default function Products() {
                     </svg>
                   </div>
                 </div>
-
+                <div>
+                  {users
+                    .filter((x) => x.id === prod.createdBy)
+                    .map((x) => (
+                      <div key={x.id}>
+                        <img
+                          className="box-product-user"
+                          src={x.img}
+                          alt="userImage"
+                        />
+                        <span>{x.userName}</span>
+                      </div>
+                    ))}
+                </div>
                 <p className="box-product-price">${prod.price}</p>
 
                 <div>

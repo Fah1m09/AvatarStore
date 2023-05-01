@@ -13,6 +13,7 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "PC",
+      createdBy: 1
     },
     {
       id: 2,
@@ -25,6 +26,7 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      createdBy: 2
     },
     {
       id: 3,
@@ -37,6 +39,7 @@ const initialState = {
       gender: "male",
       polygon: 3000,
       content: "PC",
+      createdBy: 1
     },
     {
       id: 4,
@@ -49,6 +52,7 @@ const initialState = {
       gender: "female",
       polygon: 12000,
       content: "Quest",
+      createdBy: 1
     },
     {
       id: 5,
@@ -61,6 +65,7 @@ const initialState = {
       gender: "male",
       polygon: 43000,
       content: "Quest",
+      createdBy: 2
     },
     {
       id: 6,
@@ -73,6 +78,7 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      createdBy: 3
     },
     {
       id: 7,
@@ -85,6 +91,7 @@ const initialState = {
       gender: "female",
       polygon: 13000,
       content: "Quest",
+      createdBy: 3
     },
     {
       id: 8,
@@ -97,6 +104,7 @@ const initialState = {
       gender: "female",
       polygon: 55000,
       content: "Quest",
+      createdBy: 3
     },
     {
       id: 9,
@@ -109,6 +117,7 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      createdBy: 3
     },
     {
       id: 10,
@@ -121,6 +130,7 @@ const initialState = {
       gender: "male",
       polygon: 33000,
       content: "Quest",
+      createdBy: 3
     },
     {
       id: 11,
@@ -133,6 +143,7 @@ const initialState = {
       gender: "male",
       polygon: 33000,
       content: "PC",
+      createdBy: 2
     },
     {
       id: 12,
@@ -145,6 +156,7 @@ const initialState = {
       gender: "female",
       polygon: 3000,
       content: "Quest",
+      createdBy: 1
     },
     {
       id: 13,
@@ -157,6 +169,7 @@ const initialState = {
       gender: "female",
       polygon: 18000,
       content: "PC",
+      createdBy: 1
     },
     {
       id: 14,
@@ -169,6 +182,7 @@ const initialState = {
       gender: "female",
       polygon: 25000,
       content: "Quest",
+      createdBy: 2
     },
     {
       id: 15,
@@ -181,6 +195,7 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      createdBy: 2
     },
     {
       id: 16,
@@ -193,6 +208,7 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      createdBy: 3
     },
     {
       id: 17,
@@ -205,6 +221,7 @@ const initialState = {
       gender: "male",
       polygon: 21000,
       content: "Quest",
+      createdBy: 3
     },
     {
       id: 18,
@@ -217,6 +234,7 @@ const initialState = {
       polygon: 13000,
       gender: "female",
       content: "Quest",
+      createdBy: 3
     },
     {
       id: 19,
@@ -229,6 +247,7 @@ const initialState = {
       gender: "female",
       polygon: 300,
       content: "Quest",
+      createdBy: 2
     },
     {
       id: 20,
@@ -241,6 +260,24 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      createdBy: 1
+    },
+  ],
+  users: [
+    {
+      id: 1,
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageA(F).png",
+      userName: "Avatar Joe's",
+    },
+    {
+      id: 2,
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageB(F).png",
+      userName: "Avatar James",
+    },
+    {
+      id: 3,
+      img: "http://127.0.0.1:5173/avatarPictures/VRCimageC(M).png",
+      userName: "Avatar Kai",
     },
   ],
   typeFilter: "All",
