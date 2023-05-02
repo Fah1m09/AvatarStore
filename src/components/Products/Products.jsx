@@ -1,28 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart } from "../../features/cart/cartSlice";
+import { likeDislike } from "../../features/product/productSlice";
 
 export default function Products() {
   const dispatch = useDispatch();
-  const { products, users } = useSelector((state) => state.product);
-  const { price, search, content, sort, autoUploadSupport, polygonAmount } =
-    useSelector((state) => state.filter);
   const productsPerPage = 12;
-
-  const numPages = Math.ceil(products.length / productsPerPage);
-
   const [currentPage, setCurrentPage] = useState(0);
-
   const startIndex = currentPage * productsPerPage;
   const endIndex = startIndex + productsPerPage;
-  const currentProducts = products.slice(startIndex, endIndex);
+  const { products, users } = useSelector((state) => state.product);
+  const { product } = useSelector((state) => state.cart);
+  const { price, search, content, sort, autoUploadSupport, polygonAmount } =
+    useSelector((state) => state.filter);
+  const numPages = Math.ceil(products.length / productsPerPage);
+  const [currentProducts, setCurrentProducts] = useState([]);
+
+  useEffect(() => {
+    setCurrentProducts(products.slice(startIndex, endIndex));
+  }, [products, startIndex, endIndex]);
+
+  const copyProductLink = (link) => {
+    navigator.clipboard.writeText(`http://127.0.0.1:5173/product/${link}`);
+    alert("Product link copied");
+  };
 
   const pageNum = () => {
     let elements = [];
     for (let i = 1; i <= numPages; i++) {
       elements.push(
-        <h5 className="pagination-text" onClick={() => setCurrentPage(i - 1)}>
+        <h5
+          className={`${
+            currentPage + 1 === i && "footer-active-page"
+          } pointer me-2`}
+          onClick={() => setCurrentPage(i - 1)}
+        >
           {i}
         </h5>
       );
@@ -66,66 +79,6 @@ export default function Products() {
     }
   };
 
-  const filteredContent = (product) => {
-    switch (content) {
-      case "Quest":
-        return product.content === "Quest";
-      case "PC":
-        return product.content === "PC";
-      case "Other":
-        return product.content == "Other";
-      default:
-        return true;
-    }
-  };
-
-  const filteredAutoUpload = (product) => {
-    switch (autoUploadSupport) {
-      case "Supported":
-        return product.autoUpload === true;
-      case "Unsupported":
-        return product.autoUpload === false;
-      default:
-        return true;
-    }
-  };
-
-  const filteredPrice = (product) => {
-    switch (price) {
-      case "10":
-        return product.price < 10;
-      case "10-20":
-        return product.price >= 10 && product.price <= 20;
-      case "20-30":
-        return product.price >= 20 && product.price <= 30;
-      case "30-40":
-        return product.price >= 30 && product.price <= 40;
-      case "40-50":
-        return product.price >= 40 && product.price <= 50;
-      default:
-        return true;
-    }
-  };
-
-  const filteredPolygon = (product) => {
-    switch (polygonAmount) {
-      case "7":
-        return product.polygon < 7500;
-      case "7-10":
-        return product.polygon > 7500 && product.polygon < 10000;
-      case "10-15":
-        return product.polygon > 10000 && product.polygon < 15000;
-      case "15-20":
-        return product.polygon > 15000 && product.polygon < 20000;
-      case "20-32":
-        return product.polygon > 20000 && product.polygon < 32000;
-      case "32-70":
-        return product.polygon > 32000 && product.polygon < 700000;
-      default:
-        return true;
-    }
-  };
-
   const handleAddToCart = (e, prod) => {
     e.preventDefault();
     let data = {
@@ -150,10 +103,39 @@ export default function Products() {
             ? product.name.toLowerCase().includes(search.toLowerCase())
             : currentProducts
         )
-        .filter((product) => filteredContent(product))
-        .filter((product) => filteredPrice(product))
-        .filter((product) => filteredPolygon(product))
-        .filter((product) => filteredAutoUpload(product))
+        .filter((product) => {
+          const isInPriceRange =
+            price.length > 0
+              ? price.some(
+                  (range) =>
+                    product.price > Number(range.split("-")[0]) &&
+                    product.price <= Number(range.split("-")[1])
+                )
+              : true;
+
+          const isInPolyRange =
+            polygonAmount.length > 0
+              ? polygonAmount.some(
+                  (range) =>
+                    product.polygon > Number(range.split("-")[0]) &&
+                    product.polygon <= Number(range.split("-")[1])
+                )
+              : true;
+
+          const isInContent =
+            content.length > 0
+              ? content.some((x) => product.content == x)
+              : true;
+
+          const isSupported =
+            autoUploadSupport.length > 0
+              ? autoUploadSupport.some(
+                  (x) => product.autoUpload === JSON.parse(x)
+                )
+              : true;
+
+          return isInPriceRange && isInPolyRange && isInContent && isSupported;
+        })
         .sort((a, b) => filteredSortBy(a, b))
         .map((prod) => (
           <div key={prod.id} className="col-sm-3 box-product-outer">
@@ -175,7 +157,7 @@ export default function Products() {
                     >
                       <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                     </svg>
-                    Add
+                    {product.find((x) => x.id === prod.id) ? "Added" : "Add"}
                   </button>
                 </Link>
               </div>
@@ -190,20 +172,33 @@ export default function Products() {
                     {createElements(prod.rating)} {prod.rating} & {prod.likes}
                     Likes
                   </div>
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="red"
-                      className="bi bi-heart-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
-                      />
-                    </svg>
+                  <div onClick={() => dispatch(likeDislike(prod.id))}>
+                    {prod.isLiked === true ? (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill={`${prod.isLiked === true ? "red" : "black"}`}
+                        className="bi bi-heart-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-heart"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                      </svg>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -240,6 +235,7 @@ export default function Products() {
                     )}
 
                     <svg
+                      onClick={() => copyProductLink(prod.id)}
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
                       height="20"
@@ -264,24 +260,40 @@ export default function Products() {
         ))}
       <div className="d-flex align-items-center justify-content-center">
         <nav aria-label="Page navigation example">
-          <ul className="pagination">
-            <li
-              className="page-item"
-              onClick={() => setCurrentPage(currentPage - 1)}
-            >
-              <a className="page-link" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
+          <ul className="pagination p-5 ">
+            <li onClick={() => setCurrentPage(currentPage - 1)}>
+              <a className="pointer me-2" aria-label="Previous">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="black"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+                  />
+                </svg>
               </a>
             </li>
 
             {pageNum()}
 
-            <li
-              className="page-item"
-              onClick={() => setCurrentPage(currentPage + 1)}
-            >
-              <a className="page-link" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
+            <li onClick={() => setCurrentPage(currentPage + 1)}>
+              <a className="pointer" aria-label="Next">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="black"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+                  />
+                </svg>
               </a>
             </li>
           </ul>

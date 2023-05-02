@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     sort: "All",
-    content: "All",
-    autoUploadSupport: "All",
-    price: "All",
-    polygonAmount: "All",
     category: "All",
-    search: ""
+    search: "",
+    content: [],
+    autoUploadSupport: [],
+    price: [],
+    polygonAmount: [],
 };
 
 const filterSlice = createSlice({
@@ -21,19 +21,91 @@ const filterSlice = createSlice({
             state.sort = action.payload
         },
         content: (state, action) => {
-            state.content = action.payload
+            const contentToAdd = action.payload;
+            const index = state.content.findIndex(
+              (product) => product === contentToAdd
+            );
+          
+            if (index !== -1) {
+              return {
+                ...state,
+                content: [
+                  ...state.content.slice(0, index),
+                  ...state.content.slice(index + 1),
+                ],
+              };
+            } else {
+              return {
+                ...state,
+                content: [...state.content, contentToAdd],
+              };
+            }
         },
         price: (state, action) => {
-            state.price = action.payload
+            const priceToAdd = action.payload;
+            const index = state.price.findIndex(
+              (product) => product === priceToAdd
+            );
+          
+            if (index !== -1) {
+              return {
+                ...state,
+                price: [
+                  ...state.price.slice(0, index),
+                  ...state.price.slice(index + 1),
+                ],
+              };
+            } else {
+              return {
+                ...state,
+                price: [...state.price, priceToAdd],
+              };
+            }
         },
         polygonAmount: (state, action) => {
-            state.polygonAmount = action.payload
+            const polyToAdd = action.payload;
+            const index = state.polygonAmount.findIndex(
+              (product) => product === polyToAdd
+            );
+          
+            if (index !== -1) {
+              return {
+                ...state,
+                polygonAmount: [
+                  ...state.polygonAmount.slice(0, index),
+                  ...state.polygonAmount.slice(index + 1),
+                ],
+              };
+            } else {
+              return {
+                ...state,
+                polygonAmount: [...state.polygonAmount, polyToAdd],
+              };
+            }
         },
         category: (state, action) => {
             state.category = action.payload
         },
         autoUploadSupport: (state, action) => {
-            state.autoUploadSupport = action.payload
+            const uploadToAdd = action.payload;
+            const index = state.autoUploadSupport.findIndex(
+              (product) => product === uploadToAdd
+            );
+          
+            if (index !== -1) {
+              return {
+                ...state,
+                autoUploadSupport: [
+                  ...state.autoUploadSupport.slice(0, index),
+                  ...state.autoUploadSupport.slice(index + 1),
+                ],
+              };
+            } else {
+              return {
+                ...state,
+                autoUploadSupport: [...state.autoUploadSupport, uploadToAdd],
+              };
+            }
         },
          
     },

@@ -68,19 +68,23 @@ export default function ProductView() {
                 <h2>${currentProduct?.price}</h2>
                 <div className="d-flex align-items-center">
                   {createElements(currentProduct.rating)}
-                  {currentProduct.rating}
+                  <span className="ms-2"> {currentProduct.rating}</span>
                 </div>
 
                 <h5>{currentProduct?.likes} Likes</h5>
+
                 <button
                   disabled={product.find((x) => x.id === currentProduct.id)}
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-primary me-2"
                   onClick={(e) => handleAddToCart(e, currentProduct)}
                 >
                   {product.find((x) => x.id === currentProduct.id)
                     ? "Remove from Cart"
                     : "Add to Cart"}
+                </button>
+                <button type="button" className="btn btn-success">
+                  Buy Now
                 </button>
               </div>
             </div>

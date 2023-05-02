@@ -13,7 +13,8 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "PC",
-      createdBy: 1
+      createdBy: 1,
+      isLiked: false,
     },
     {
       id: 2,
@@ -26,7 +27,8 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "Quest",
-      createdBy: 2
+      createdBy: 2,
+      isLiked: false,
     },
     {
       id: 3,
@@ -39,6 +41,7 @@ const initialState = {
       gender: "male",
       polygon: 3000,
       content: "PC",
+      isLiked: false,
       createdBy: 1
     },
     {
@@ -52,6 +55,7 @@ const initialState = {
       gender: "female",
       polygon: 12000,
       content: "Quest",
+      isLiked: false,
       createdBy: 1
     },
     {
@@ -65,6 +69,7 @@ const initialState = {
       gender: "male",
       polygon: 43000,
       content: "Quest",
+      isLiked: false,
       createdBy: 2
     },
     {
@@ -73,11 +78,12 @@ const initialState = {
       name: "Avatar name avatown nice original Avatown F",
       rating: 4.7,
       likes: 0,
-      price: 30,
+      price: 10,
       autoUpload: true,
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      isLiked: false,
       createdBy: 3
     },
     {
@@ -90,7 +96,8 @@ const initialState = {
       autoUpload: true,
       gender: "female",
       polygon: 13000,
-      content: "Quest",
+      content: "PC",
+      isLiked: false,
       createdBy: 3
     },
     {
@@ -104,6 +111,7 @@ const initialState = {
       gender: "female",
       polygon: 55000,
       content: "Quest",
+      isLiked: false,
       createdBy: 3
     },
     {
@@ -112,11 +120,12 @@ const initialState = {
       name: "Avatar name 9",
       rating: 4.7,
       likes: 0,
-      price: 30,
+      price: 22,
       autoUpload: true,
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      isLiked: false,
       createdBy: 3
     },
     {
@@ -130,6 +139,7 @@ const initialState = {
       gender: "male",
       polygon: 33000,
       content: "Quest",
+      isLiked: false,
       createdBy: 3
     },
     {
@@ -138,11 +148,12 @@ const initialState = {
       name: "Avatar name",
       rating: 5,
       likes: 100,
-      price: 50,
+      price: 15,
       autoUpload: false,
       gender: "male",
       polygon: 33000,
       content: "PC",
+      isLiked: false,
       createdBy: 2
     },
     {
@@ -151,11 +162,12 @@ const initialState = {
       name: "Avatar name 12",
       rating: 3.7,
       likes: 30,
-      price: 50,
+      price: 8,
       autoUpload: true,
       gender: "female",
       polygon: 3000,
       content: "Quest",
+      isLiked: false,
       createdBy: 1
     },
     {
@@ -169,6 +181,7 @@ const initialState = {
       gender: "female",
       polygon: 18000,
       content: "PC",
+      isLiked: false,
       createdBy: 1
     },
     {
@@ -182,6 +195,7 @@ const initialState = {
       gender: "female",
       polygon: 25000,
       content: "Quest",
+      isLiked: false,
       createdBy: 2
     },
     {
@@ -195,6 +209,7 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      isLiked: false,
       createdBy: 2
     },
     {
@@ -208,6 +223,7 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      isLiked: false,
       createdBy: 3
     },
     {
@@ -221,6 +237,7 @@ const initialState = {
       gender: "male",
       polygon: 21000,
       content: "Quest",
+      isLiked: false,
       createdBy: 3
     },
     {
@@ -234,6 +251,7 @@ const initialState = {
       polygon: 13000,
       gender: "female",
       content: "Quest",
+      isLiked: false,
       createdBy: 3
     },
     {
@@ -247,6 +265,7 @@ const initialState = {
       gender: "female",
       polygon: 300,
       content: "Quest",
+      isLiked: false,
       createdBy: 2
     },
     {
@@ -260,6 +279,7 @@ const initialState = {
       gender: "female",
       polygon: 33000,
       content: "Quest",
+      isLiked: false,
       createdBy: 1
     },
   ],
@@ -280,12 +300,6 @@ const initialState = {
       userName: "Avatar Kai",
     },
   ],
-  typeFilter: "All",
-  isLoading: false,
-  isError: false,
-  isSuccess: false,
-  error: "",
-  editing: {},
 };
 
 // create slice
@@ -293,18 +307,18 @@ const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    editActive: (state, action) => {
-      state.editing = action.payload;
-    },
-    editInActive: (state) => {
-      state.editing = {};
-    },
-    changeTypeFilter: (state, action) => {
-      state.typeFilter = action.payload;
-    },
+    likeDislike: (state, action) => {
+      const indexToUpdate = action.payload;
+      const existingProduct = state.products.find(
+        (product) => product.id === indexToUpdate
+      );
+      if (existingProduct) {
+        existingProduct.isLiked = !existingProduct.isLiked
+      } 
+  },
   },
 });
 
 export default productSlice.reducer;
-export const { editActive, editInActive, changeTypeFilter } =
+export const { likeDislike } =
   productSlice.actions;

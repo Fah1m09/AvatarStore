@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   autoUploadSupport,
@@ -11,6 +12,42 @@ export default function FilterMenu() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.filter);
   const [filterData, setFilterData] = useState(data);
+  const priceRanges = [
+    { label: "Under $10", value: "0-10" },
+    { label: "$10 - $20", value: "10-20" },
+    { label: "$20 - $30", value: "20-30" },
+    { label: "$30 - $40", value: "30-40" },
+    { label: "$40 - $50", value: "40-50" },
+  ];
+  const polygonRanges = [
+    { label: "Under △7500", value: "0-7500" },
+    { label: "△7,500 to △10,000", value: "7500-10000" },
+    { label: "△10,000 to △15,000", value: "10000-15000" },
+    { label: "△15,500 to △20,000", value: "15000-20000" },
+    { label: "△20,500 to △32,000", value: "20000-32000" },
+    { label: "△32,500 to △70,000", value: "32000-70000" },
+  ];
+  const contentList = [
+    { label: "VRChat(Quest)", value: "Quest" },
+    { label: "VRChat(PCVR)", value: "PC" },
+    { label: "Others", value: "Other" },
+  ];
+  const autoUploadList = [
+    { label: "Supported", value: true },
+    { label: "Unsupported", value: false },
+  ];
+
+  const handlePriceRangeChange = (event) => {
+    let tempFilter = {
+      content: filterData.content,
+      filter: filterData.filter,
+      autoUploadSupport: filterData.autoUploadSupport,
+      price: event.target.value,
+      polygonAmount: filterData.polygonAmount,
+    };
+    setFilterData(tempFilter);
+    dispatch(price(event.target.value));
+  };
 
   const handleFilterContent = (event) => {
     let tempFilter = {
@@ -34,20 +71,10 @@ export default function FilterMenu() {
     dispatch(autoUploadSupport(event.target.value));
   };
 
-  const handleFilterPrice = (event) => {
-    let tempFilter = {
-      content: filterData.content,
-      autoUploadSupport: filterData.autoUploadSupport,
-      price: event.target.value,
-      polygonAmount: filterData.polygonAmount,
-    };
-    setFilterData(tempFilter);
-    dispatch(price(event.target.value));
-  };
-
   const handleFilterPolygonAmount = (event) => {
     let tempFilter = {
       content: filterData.content,
+      filter: filterData.filter,
       autoUploadSupport: filterData.autoUploadSupport,
       price: filterData.price,
       polygonAmount: event.target.value,
@@ -74,206 +101,62 @@ export default function FilterMenu() {
       <h5>Contents</h5>
       <div className="row">
         <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="Quest"
-            checked={filterData.content === "Quest"}
-            onChange={handleFilterContent}
-          />
-          <label className="form-check-label" htmlFor="flexCheckDefault">
-            VRChat(Quest)
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="PC"
-            checked={filterData.content === "PC"}
-            onChange={handleFilterContent}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            VRChat(PCVR)
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="Other"
-            checked={filterData.content === "Other"}
-            onChange={handleFilterContent}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            Others
-          </label>
+          {contentList.map((range, index) => (
+            <Form.Check
+              key={index}
+              type="checkbox"
+              label={range.label}
+              value={range.value}
+              checked={range.checked}
+              onChange={handleFilterContent}
+            />
+          ))}
         </div>
       </div>
       <h5>Price</h5>
       <div className="row">
         <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="10"
-            checked={filterData.price === "10"}
-            onChange={handleFilterPrice}
-          />
-          <label className="form-check-label" htmlFor="flexCheckDefault">
-            Under $10
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="10-20"
-            checked={filterData.price === "10-20"}
-            onChange={handleFilterPrice}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            $10 to $20
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="20-30"
-            checked={filterData.price === "20-30"}
-            onChange={handleFilterPrice}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            $20 to $30
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="30-40"
-            checked={filterData.price === "30-40"}
-            onChange={handleFilterPrice}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            $30 to $40
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="40-50"
-            checked={filterData.price === "40-50"}
-            onChange={handleFilterPrice}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            $40 to $50
-          </label>
+          {priceRanges.map((range, index) => (
+            <Form.Check
+              key={index}
+              type="checkbox"
+              label={range.label}
+              value={range.value}
+              checked={range.checked}
+              onChange={handlePriceRangeChange}
+            />
+          ))}
         </div>
       </div>
 
       <h5>Polygon amount</h5>
       <div className="row">
         <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="7"
-            checked={filterData.polygonAmount === "7"}
-            onChange={handleFilterPolygonAmount}
-          />
-          <label className="form-check-label" htmlFor="flexCheckDefault">
-            Under 🛆7,500
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="7-10"
-            checked={filterData.polygonAmount === "7-10"}
-            onChange={handleFilterPolygonAmount}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            🛆7,500 - 🛆10,000
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="10-15"
-            checked={filterData.polygonAmount === "10-15"}
-            onChange={handleFilterPolygonAmount}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            🛆10,000 - 🛆15,000
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="15-20"
-            checked={filterData.polygonAmount === "15-20"}
-            onChange={handleFilterPolygonAmount}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            🛆15,000 - 🛆20,000
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="20-32"
-            checked={filterData.polygonAmount === "20-32"}
-            onChange={handleFilterPolygonAmount}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            🛆20,000 - 🛆32,000
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="32-70"
-            checked={filterData.polygonAmount === "32-70"}
-            onChange={handleFilterPolygonAmount}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            🛆32,000 - 🛆70,000
-          </label>
+          {polygonRanges.map((range, index) => (
+            <Form.Check
+              key={index}
+              type="checkbox"
+              label={range.label}
+              value={range.value}
+              checked={range.checked}
+              onChange={handleFilterPolygonAmount}
+            />
+          ))}
         </div>
       </div>
       <h5>Auto upload support</h5>
       <div className="row">
         <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="Supported"
-            checked={filterData.autoUploadSupport === "Supported"}
-            onChange={handleFilterAutoUpload}
-          />
-          <label className="form-check-label" htmlFor="flexCheckDefault">
-            Supported
-          </label>
-        </div>
-        <div>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="Unsupported"
-            checked={filterData.autoUploadSupport === "Unsupported"}
-            onChange={handleFilterAutoUpload}
-          />
-          <label className="form-check-label" htmlFor="flexCheckChecked">
-            Unsupported
-          </label>
+          {autoUploadList.map((range, index) => (
+            <Form.Check
+              key={index}
+              type="checkbox"
+              label={range.label}
+              value={range.value}
+              checked={range.checked}
+              onChange={handleFilterAutoUpload}
+            />
+          ))}
         </div>
       </div>
     </div>

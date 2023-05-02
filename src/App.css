@@ -15,8 +15,14 @@ body {
 }
 
 .bg-gradient-purple {
-  background: linear-gradient(to left, #5104a4, #A600D6);
+  background: linear-gradient(to left, #9e006f, #5104a4);
   color: white;
+}
+
+.nav-go-2-market{
+  margin-left: 1rem;
+  color: #fff;
+  font-weight: bolder;
 }
 
 .product_title {
@@ -104,15 +110,6 @@ body {
 }
 .green-ball {
   background-color: #75de73;
-}
-
-.pagination-text {
-  cursor: pointer;
-  padding: 5px;
-}
-.pagination-text:hover {
-  font-size: 22px;
-  color: black;
 }
 
 #product-info {
@@ -221,4 +218,13 @@ body {
   padding-left: 17px;
   font-size: 15px;
   line-height: 1.3rem;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.footer-active-page{
+  background-color: darkgray;
+  padding: 0px 6px;
 }
