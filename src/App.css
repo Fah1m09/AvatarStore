@@ -19,7 +19,7 @@ body {
   color: white;
 }
 
-.nav-go-2-market{
+.nav-go-2-market {
   margin-left: 1rem;
   color: #fff;
   font-weight: bolder;
@@ -54,7 +54,7 @@ body {
   line-height: 12px;
 }
 
-.box-product-user{
+.box-product-user {
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -142,6 +142,14 @@ body {
   height: 100%;
 }
 
+.btn-copy {
+  position: absolute;
+  z-index: 5;
+  background: #ffffff;
+  border: 1px solid #6a6a6a;
+  border-radius: 7.2px;
+}
+
 /* sectioning completed */
 
 .thumb-box {
@@ -220,11 +228,26 @@ body {
   line-height: 1.3rem;
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
-.footer-active-page{
+.footer-active-page {
   background-color: darkgray;
   padding: 0px 6px;
+}
+
+.dropdown {
+  padding: 0;
+  color: #fff;
+}
+
+.filter-cat-li {
+  cursor: pointer;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.filter-cat-li-selected {
+  text-decoration: underline;
 }

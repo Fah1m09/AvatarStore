@@ -20,6 +20,9 @@ const filterSlice = createSlice({
         sortByFilter: (state, action) => {
             state.sort = action.payload
         },
+        category: (state, action) => {
+          state.category = action.payload
+      },
         content: (state, action) => {
             const contentToAdd = action.payload;
             const index = state.content.findIndex(
@@ -82,9 +85,6 @@ const filterSlice = createSlice({
                 polygonAmount: [...state.polygonAmount, polyToAdd],
               };
             }
-        },
-        category: (state, action) => {
-            state.category = action.payload
         },
         autoUploadSupport: (state, action) => {
             const uploadToAdd = action.payload;

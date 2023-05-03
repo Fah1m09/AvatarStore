@@ -74,7 +74,6 @@ export default function ProductView() {
                 <h5>{currentProduct?.likes} Likes</h5>
 
                 <button
-                  disabled={product.find((x) => x.id === currentProduct.id)}
                   type="button"
                   className="btn btn-primary me-2"
                   onClick={(e) => handleAddToCart(e, currentProduct)}

@@ -12,8 +12,15 @@ export default function Products() {
   const endIndex = startIndex + productsPerPage;
   const { products, users } = useSelector((state) => state.product);
   const { product } = useSelector((state) => state.cart);
-  const { price, search, content, sort, autoUploadSupport, polygonAmount } =
-    useSelector((state) => state.filter);
+  const {
+    category,
+    price,
+    search,
+    content,
+    sort,
+    autoUploadSupport,
+    polygonAmount,
+  } = useSelector((state) => state.filter);
   const numPages = Math.ceil(products.length / productsPerPage);
   const [currentProducts, setCurrentProducts] = useState([]);
 
@@ -79,6 +86,19 @@ export default function Products() {
     }
   };
 
+  const filteredSortCategory = (product) => {
+    switch (category) {
+      case "male":
+        return product.gender === "male";
+      case "female":
+        return product.gender === "female";
+      case "unisex":
+        return product.gender === "unisex";
+      default:
+        return true;
+    }
+  };
+
   const handleAddToCart = (e, prod) => {
     e.preventDefault();
     let data = {
@@ -136,6 +156,7 @@ export default function Products() {
 
           return isInPriceRange && isInPolyRange && isInContent && isSupported;
         })
+        .filter((product) => filteredSortCategory(product))
         .sort((a, b) => filteredSortBy(a, b))
         .map((prod) => (
           <div key={prod.id} className="col-sm-3 box-product-outer">
@@ -233,7 +254,6 @@ export default function Products() {
                         within 24 hours
                       </p>
                     )}
-
                     <svg
                       onClick={() => copyProductLink(prod.id)}
                       xmlns="http://www.w3.org/2000/svg"

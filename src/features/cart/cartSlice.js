@@ -16,12 +16,14 @@ const cartSlice = createSlice({
               (product) => product.id === productToAdd.id
             );
             if (existingProductIndex !== -1) {
-              const updatedProducts = [...state.product];
               return {
                 ...state,
-                product: updatedProducts,
-                total: state.total + productToAdd.price,
-                items: state.items + 1 
+                product: [
+                  ...state.product.slice(0, existingProductIndex),
+                  ...state.product.slice(existingProductIndex + 1),
+                ],
+                total: state.total - productToAdd.price,
+                items: state.items - 1 
               };
             } else {
               return {

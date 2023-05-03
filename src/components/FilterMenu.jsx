@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   autoUploadSupport,
+  category,
   content,
   polygonAmount,
   price,
@@ -12,6 +13,29 @@ export default function FilterMenu() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.filter);
   const [filterData, setFilterData] = useState(data);
+  const [selectedCat, setSelectedCat] = useState("");
+  const [categoryList, setCategoryList] = useState([
+    {
+      id: 1,
+      value: "Full Avatar",
+      showSubmenu: false,
+      submenu: [
+        {
+          id: 1,
+          value: "HumanBased",
+          showSubmenu: false,
+          submenu: [
+            { id: 1, displayName: "Male", value: "male" },
+            { id: 2, displayName: "Female", value: "female" },
+            { id: 3, displayName: "Unisex", value: "unisex" },
+          ],
+        },
+        { id: 2, value: "Animal & mythical creature" },
+        { id: 3, value: "Robot based" },
+      ],
+    },
+    { id: 2, value: "Others" },
+  ]);
   const priceRanges = [
     { label: "Under $10", value: "0-10" },
     { label: "$10 - $20", value: "10-20" },
@@ -83,21 +107,77 @@ export default function FilterMenu() {
     dispatch(polygonAmount(event.target.value));
   };
 
+  const handleShowSubmenu = (Id, subId) => {
+    let tempArray = [...categoryList];
+    tempArray[Id - 1].submenu[subId - 1].showSubmenu =
+      !tempArray[Id - 1].submenu[subId - 1].showSubmenu;
+    setCategoryList(tempArray);
+  };
+
+  const handleShow = (Id) => {
+    let tempArray = [...categoryList];
+    tempArray[Id - 1].showSubmenu = !tempArray[Id - 1].showSubmenu;
+    setCategoryList(tempArray);
+  };
+  console.log(selectedCat);
+
   return (
     <div>
       <h5>Category</h5>
-      <div>
-        <input className="form-check-input" type="checkbox" value="" />
-        <label className="form-check-label" htmlFor="flexCheckDefault">
-          FullAvatar
-        </label>
-      </div>
-      <div>
-        <input className="form-check-input" type="checkbox" value="" />
-        <label className="form-check-label" htmlFor="flexCheckChecked">
-          Others
-        </label>
-      </div>
+      <ul>
+        {categoryList.map((cat) => (
+          <li className="filter-cat-li" key={cat.id}>
+            <a onClick={() => handleShow(cat.id)}>{cat.value}</a>
+            <ul>
+              {cat.showSubmenu &&
+                cat.id === 1 &&
+                cat.submenu.map((subMenu, index) => (
+                  <li
+                    className={`filter-cat-li ${
+                      selectedCat === subMenu.value
+                        ? "filter-cat-li-selected"
+                        : ""
+                    }`}
+                    key={index}
+                  >
+                    <a
+                      onClick={() => {
+                        setSelectedCat(subMenu.value);
+                        handleShowSubmenu(cat.id, subMenu.id);
+                      }}
+                    >
+                      {subMenu.value}
+                    </a>
+                    <ul>
+                      {subMenu.showSubmenu &&
+                        subMenu.id === 1 &&
+                        subMenu.submenu.map((subSubMenu, index) => (
+                          <li
+                            className={`filter-cat-li ${
+                              selectedCat === subSubMenu.value
+                                ? "filter-cat-li-selected"
+                                : ""
+                            }`}
+                            key={index}
+                          >
+                            <a
+                              onClick={() => {
+                                setSelectedCat(subSubMenu.value);
+                                dispatch(category(subSubMenu.value));
+                              }}
+                            >
+                              {subSubMenu.displayName}
+                            </a>
+                          </li>
+                        ))}
+                    </ul>
+                  </li>
+                ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+
       <h5>Contents</h5>
       <div className="row">
         <div>
@@ -105,6 +185,7 @@ export default function FilterMenu() {
             <Form.Check
               key={index}
               type="checkbox"
+              name="content"
               label={range.label}
               value={range.value}
               checked={range.checked}
@@ -120,6 +201,7 @@ export default function FilterMenu() {
             <Form.Check
               key={index}
               type="checkbox"
+              name="price"
               label={range.label}
               value={range.value}
               checked={range.checked}
@@ -136,6 +218,7 @@ export default function FilterMenu() {
             <Form.Check
               key={index}
               type="checkbox"
+              name="polygon"
               label={range.label}
               value={range.value}
               checked={range.checked}
@@ -151,6 +234,7 @@ export default function FilterMenu() {
             <Form.Check
               key={index}
               type="checkbox"
+              name="autoUpload"
               label={range.label}
               value={range.value}
               checked={range.checked}
