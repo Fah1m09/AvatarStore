@@ -29,7 +29,9 @@ export default function Products() {
   }, [products, startIndex, endIndex]);
 
   const copyProductLink = (link) => {
-    navigator.clipboard.writeText(`http://127.0.0.1:5173/product/${link}`);
+    navigator.clipboard.writeText(
+      `${import.meta.env.VITE_REACT_URL}/product/${link}`
+    );
     alert("Product link copied");
   };
 

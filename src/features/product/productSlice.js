@@ -4,7 +4,7 @@ const initialState = {
   products: [
     {
       id: 1,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageA(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageA(F).png`,
       name: "VRC Avatar name Avatown A female",
       rating: 5,
       likes: 100,
@@ -18,7 +18,7 @@ const initialState = {
     },
     {
       id: 2,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageB(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageB(F).png`,
       name: "Avatar name avatown nice original Avatown B",
       rating: 3.7,
       likes: 30,
@@ -32,7 +32,7 @@ const initialState = {
     },
     {
       id: 3,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageC(M).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageC(M).png`,
       name: "Avatar name avatown nice original Avatown C",
       rating: 4,
       likes: 100,
@@ -46,7 +46,7 @@ const initialState = {
     },
     {
       id: 4,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageD(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageD(F).png`,
       name: "Avatar name avatown nice original Avatown D",
       rating: 4.7,
       likes: 0,
@@ -60,7 +60,7 @@ const initialState = {
     },
     {
       id: 5,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageE(M).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageE(M).png`,
       name: "Avatar name avatown nice original Avatown E",
       rating: 4.7,
       likes: 0,
@@ -74,7 +74,7 @@ const initialState = {
     },
     {
       id: 6,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageF(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageF(F).png`,
       name: "Avatar name avatown nice original Avatown F",
       rating: 4.7,
       likes: 0,
@@ -88,7 +88,7 @@ const initialState = {
     },
     {
       id: 7,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageG(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageG(F).png`,
       name: "Avatar name avatown nice original Avatown G",
       rating: 4.7,
       likes: 0,
@@ -102,7 +102,7 @@ const initialState = {
     },
     {
       id: 8,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageH(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageH(F).png`,
       name: "Avatar name avatown nice original Avatown H",
       rating: 4.7,
       likes: 0,
@@ -116,7 +116,7 @@ const initialState = {
     },
     {
       id: 9,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageI(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageI(F).png`,
       name: "Avatar name 9",
       rating: 4.7,
       likes: 0,
@@ -130,7 +130,7 @@ const initialState = {
     },
     {
       id: 10,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageJ(M).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageJ(M).png`,
       name: "Avatar name 10",
       rating: 4.7,
       likes: 0,
@@ -144,7 +144,7 @@ const initialState = {
     },
     {
       id: 11,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageK(M).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageK(M).png`,
       name: "Avatar name",
       rating: 5,
       likes: 100,
@@ -158,7 +158,7 @@ const initialState = {
     },
     {
       id: 12,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageL(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageL(F).png`,
       name: "Avatar name 12",
       rating: 3.7,
       likes: 30,
@@ -172,7 +172,7 @@ const initialState = {
     },
     {
       id: 13,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageM(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageM(F).png`,
       name: "Avatar name 13",
       rating: 4,
       likes: 100,
@@ -186,7 +186,7 @@ const initialState = {
     },
     {
       id: 14,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageN(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageN(F).png`,
       name: "Avatar name 14",
       rating: 4,
       likes: 0,
@@ -200,7 +200,7 @@ const initialState = {
     },
     {
       id: 15,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageO(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageO(F).png`,
       name: "Avatar name 15",
       rating: 4.7,
       likes: 660,
@@ -214,7 +214,7 @@ const initialState = {
     },
     {
       id: 16,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageP(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageP(F).png`,
       name: "Avatar name 16",
       rating: 4.7,
       likes: 700,
@@ -228,7 +228,7 @@ const initialState = {
     },
     {
       id: 17,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageQ(M).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageQ(M).png`,
       name: "Avatar name 17",
       rating: 2,
       likes: 50,
@@ -242,7 +242,7 @@ const initialState = {
     },
     {
       id: 18,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageR(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageR(F).png`,
       name: "Avatar name 18",
       rating: 4.7,
       likes: 30,
@@ -256,7 +256,7 @@ const initialState = {
     },
     {
       id: 19,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageS(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageS(F).png`,
       name: "Avatar name 19",
       rating: 4.7,
       likes: 20,
@@ -270,7 +270,7 @@ const initialState = {
     },
     {
       id: 20,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageT(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageT(F).png`,
       name: "Avatar name 20",
       rating: 4.7,
       likes: 100,
@@ -286,17 +286,17 @@ const initialState = {
   users: [
     {
       id: 1,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageA(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageA(F).png`,
       userName: "Avatar Joe's",
     },
     {
       id: 2,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageB(F).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageB(F).png`,
       userName: "Avatar James",
     },
     {
       id: 3,
-      img: "http://127.0.0.1:5173/avatarPictures/VRCimageC(M).png",
+      img: `${import.meta.env.VITE_REACT_URL}/avatarPictures/VRCimageC(M).png`,
       userName: "Avatar Kai",
     },
   ],
